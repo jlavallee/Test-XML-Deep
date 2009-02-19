@@ -1,10 +1,13 @@
 Build.PL
 Changes
-MANIFEST
-README
 lib/Test/XML/Deep.pm
+Makefile.PL
+MANIFEST
+META.yml
+README
 t/00-load.t
+t/01-basic.t
+t/02-bad_xml.t
+t/boilerplate.t
 t/pod-coverage.t
 t/pod.t
-Makefile.PL
-META.yml
