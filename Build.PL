@@ -1,0 +1,17 @@
+use strict;
+use warnings;
+use Module::Build;
+
+my $builder = Module::Build->new(
+    module_name         => 'Test::XML::Deep',
+    license             => 'perl',
+    dist_author         => 'Jeff Lavallee <jeff@zeroclue.com>',
+    dist_version_from   => 'lib/Test/XML/Deep.pm',
+    build_requires => {
+        'Test::More' => 0,
+    },
+    add_to_cleanup      => [ 'Test-XML-Deep-*' ],
+    create_makefile_pl => 'traditional',
+);
+
+$builder->create_build_script();
