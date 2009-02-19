@@ -7,9 +7,11 @@ use XML::Simple;
 use Test::Deep;
 use Exporter;
 
+my $Test = Test::Builder->new;
+
 use base qw/Exporter/;
 
-our @EXPORT = qw/ cmp_deeply_xml /;
+our @EXPORT = qw/ cmp_xml_deeply /;
 
 =head1 NAME
 
@@ -55,7 +57,7 @@ An Example:
                                  ]
                    };
 
-    cmp_deeply_xml($xml, $expected);
+    cmp_xml_deeply($xml, $expected);
 
 
 Or, you can use Test::Deep and make use of the functions it exports (I.E. array_each(), re()):
@@ -77,25 +79,34 @@ Or, you can use Test::Deep and make use of the functions it exports (I.E. array_
                                   )
                    };
 
-    cmp_deeply_xml($xml, $expected);
+    cmp_xml_deeply($xml, $expected);
 
 
 =head1 EXPORT
 
-cmp_deeply_xml 
+cmp_xml_deeply 
 
 =head1 FUNCTIONS
 
-=head2 cmp_deeply_xml
+=head2 cmp_xml_deeply
 
 =cut
 
-sub cmp_deeply_xml {
-    my ( $xml, $expected ) = @_;
+sub cmp_xml_deeply {
+    my ( $xml, $expected, $name ) = @_;
 
-    my $test = XMLin( $xml );
+    my $test  = eval { XMLin( $xml ); };
+    my $not_ok = $@;
 
-    cmp_deeply( $test, $expected );
+	if ($not_ok){
+        ( my $message = $not_ok ) =~ s/ at .*//g;   # ick!
+        $message =~ s/\n(?=.)/\.  /g;
+        chomp $message;
+		$Test->diag("XML parsing failed: $message");
+        $Test->ok(0, $name);
+	}else{
+        cmp_deeply( $test, $expected, $name );
+    }
 }
 
 

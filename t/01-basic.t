@@ -31,7 +31,7 @@ EOXML
                                  ]
                    };
 
-    cmp_deeply_xml($xml, $expected);
+    cmp_xml_deeply($xml, $expected);
 }
 
 {
@@ -50,7 +50,7 @@ EOXML
                                   )
                    };
 
-    cmp_deeply_xml($xml, $expected);
+    cmp_xml_deeply($xml, $expected);
 }
 
 
