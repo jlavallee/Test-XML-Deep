@@ -3,9 +3,17 @@ package Test::XML::Deep;
 use warnings;
 use strict;
 
+use XML::Simple;
+use Test::Deep;
+use Exporter;
+
+use base qw/Exporter/;
+
+our @EXPORT = qw/ cmp_deeply_xml /;
+
 =head1 NAME
 
-Test::XML::Deep - The great new Test::XML::Deep!
+Test::XML::Deep = XML::Simple + Test::Deep
 
 =head1 VERSION
 
@@ -18,35 +26,79 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
+This module can be used to easily test that some XML has the structure and values you desire.
 
-Perhaps a little code snippet.
+It is particularly useful when some values in your XML document may differ from one test run
+to another (for example, a timestamp).
+
+An Example:
 
     use Test::XML::Deep;
 
-    my $foo = Test::XML::Deep->new();
-    ...
+    my $xml = <<EOXML;
+    <?xml version="1.0" encoding="UTF-8"?>
+    <example>
+        <sometag attribute="value">some data</sometag>
+        <sometag attribute="other">more data</sometag>
+    </example>
+    EOXML
+
+    my $expected = { 'sometag' => [
+                                   {
+                                     'attribute' => 'value',
+                                     'content' => 'some data'
+                                   },
+                                   {
+                                     'attribute' => 'other',
+                                     'content' => 'more data'
+                                   }
+                                 ]
+                   };
+
+    cmp_deeply_xml($xml, $expected);
+
+
+Or, you can use Test::Deep and make use of the functions it exports (I.E. array_each(), re()):
+
+    use Test::Deep;
+    use Test::XML::Deep;
+
+    my $xml = <<EOXML;
+    <?xml version="1.0" encoding="UTF-8"?>
+    <example>
+        <sometag attribute="1234">some data</sometag>
+        <sometag attribute="4321">more data</sometag>
+    </example>
+    EOXML
+
+    my $expected = { 'sometag' => array_each( { 'attribute' => re('^\d+$'),
+                                                'content' => re('data$'),
+                                               }
+                                  )
+                   };
+
+    cmp_deeply_xml($xml, $expected);
+
 
 =head1 EXPORT
 
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
+cmp_deeply_xml 
 
 =head1 FUNCTIONS
 
-=head2 function1
+=head2 cmp_deeply_xml
 
 =cut
 
-sub function1 {
+sub cmp_deeply_xml {
+    my ( $xml, $expected ) = @_;
+
+    my $test = XMLin( $xml );
+
+    cmp_deeply( $test, $expected );
 }
 
-=head2 function2
 
-=cut
-
-sub function2 {
-}
 
 =head1 AUTHOR
 
@@ -57,8 +109,6 @@ Jeff Lavallee, C<< <jeff at zeroclue.com> >>
 Please report any bugs or feature requests to C<bug-test-xml-deep at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-XML-Deep>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
-
-
 
 
 =head1 SUPPORT
@@ -100,6 +150,10 @@ Copyright 2009 Jeff Lavallee, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
+
+=head1 SEE ALSO
+
+L<Test::XML::Simple>
 
 
 =cut
