@@ -6,6 +6,7 @@ my $builder = Module::Build->new(
     module_name         => 'Test::XML::Deep',
     license             => 'perl',
     dist_author         => 'Jeff Lavallee <jeff@zeroclue.com>',
+    dist_abstract       => 'XML::Simple + Test::Deep = Test::XML::Deep',
     dist_version_from   => 'lib/Test/XML/Deep.pm',
     build_requires => {
         'Test::More' => 0,
