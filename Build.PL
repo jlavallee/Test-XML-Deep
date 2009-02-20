@@ -11,6 +11,11 @@ my $builder = Module::Build->new(
     build_requires => {
         'Test::More' => 0,
     },
+    requires => {
+        'perl'        => 5.006,
+        'XML::Simple' => 2.18,
+        'Test::Deep'  => 0,
+    },
     add_to_cleanup      => [ 'Test-XML-Deep-*' ],
     create_makefile_pl => 'traditional',
 );

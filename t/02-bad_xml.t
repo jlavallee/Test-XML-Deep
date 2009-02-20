@@ -5,7 +5,7 @@ use Data::Dumper;
 use Test::Deep;
 use Test::More tests => 3;
 use Test::Builder::Tester;
-use Test::Builder::Tester::Color;
+#use Test::Builder::Tester::Color;
 use Test::More;
 
 BEGIN {
