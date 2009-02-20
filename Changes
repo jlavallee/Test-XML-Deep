@@ -3,3 +3,6 @@ Revision history for Test-XML-Deep
 0.01    Thu Feb 19 07:55:23 PST 2009
         First version, released on an unsuspecting CPAN.
 
+0.02    Thu Feb 19 18:02:32 PST 2009
+        Add prereqs 
+
