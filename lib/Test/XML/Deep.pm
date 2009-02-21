@@ -3,10 +3,11 @@ package Test::XML::Deep;
 use warnings;
 use strict;
 
+use Exporter;
 use XML::Parser;
 use XML::Simple;
-use Test::Deep;
-use Exporter;
+use Sub::Uplevel qw/uplevel/;
+use Test::Deep qw/deep_diag/;
 
 my $Test = Test::Builder->new;
 
@@ -20,11 +21,11 @@ Test::XML::Deep = XML::Simple + Test::Deep
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 
 =head1 SYNOPSIS
@@ -106,11 +107,15 @@ sub cmp_xml_deeply {
         ( my $message = $not_ok ) =~ s/ at (?!line).*//g;   # ick!
         $message =~ s/^\n//g;
         #chomp $message;
-		$Test->diag("Failed to parse \n$xml\nXML::Parser error was: $message\n");
         $Test->ok(0, $name);
+		$Test->diag("Failed to parse \n$xml\nXML::Parser error was: $message\n");
 	}else{
         my $test  = XMLin( $xml ); 
-        cmp_deeply( $test, $expected, $name );
+        my ($ok, $stack) = Test::Deep::cmp_details($test, $expected);
+        if (not $Test->ok($ok, $name)){
+            my $diag = deep_diag($stack);
+            $Test->diag($diag);
+        }
     }
 }
 
