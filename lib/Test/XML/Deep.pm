@@ -3,6 +3,7 @@ package Test::XML::Deep;
 use warnings;
 use strict;
 
+use XML::Parser;
 use XML::Simple;
 use Test::Deep;
 use Exporter;
@@ -19,11 +20,11 @@ Test::XML::Deep = XML::Simple + Test::Deep
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 
 =head1 SYNOPSIS
@@ -95,16 +96,20 @@ cmp_xml_deeply
 sub cmp_xml_deeply {
     my ( $xml, $expected, $name ) = @_;
 
-    my $test  = eval { XMLin( $xml ); };
+    my $parser = new XML::Parser(Style => 'Tree');
+    eval { $parser->parse($xml); };
+
+ 
     my $not_ok = $@;
 
 	if ($not_ok){
-        ( my $message = $not_ok ) =~ s/ at .*//g;   # ick!
-        $message =~ s/\n(?=.)/\.  /g;
-        chomp $message;
-		$Test->diag("XML parsing failed: $message");
+        ( my $message = $not_ok ) =~ s/ at (?!line).*//g;   # ick!
+        $message =~ s/^\n//g;
+        #chomp $message;
+		$Test->diag("Failed to parse \n$xml\nXML::Parser error was: $message\n");
         $Test->ok(0, $name);
 	}else{
+        my $test  = XMLin( $xml ); 
         cmp_deeply( $test, $expected, $name );
     }
 }

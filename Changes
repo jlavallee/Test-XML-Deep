@@ -6,3 +6,5 @@ Revision history for Test-XML-Deep
 0.02    Thu Feb 19 18:02:32 PST 2009
         Add prereqs 
 
+0.03    Sat Feb 21 13:45:41 PST 2009
+        Use XML::Parser for initial XML parsing
