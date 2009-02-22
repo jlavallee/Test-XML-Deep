@@ -1,9 +1,10 @@
 #!perl -T
 
-use Test::More tests => 3;
-use XML::Simple;
-use Data::Dumper;
+use strict;
+use warnings;
+use Test::More tests => 4;
 use Test::Deep;
+use Test::NoWarnings;
 
 BEGIN {
 	use_ok( 'Test::XML::Deep' );

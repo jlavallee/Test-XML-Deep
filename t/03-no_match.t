@@ -1,12 +1,11 @@
 #!perl -T
 
-use XML::Simple;
-use Data::Dumper;
-use Test::Deep;
-use Test::More tests => 2;
+use strict;
+use warnings;
+use Test::More tests => 3;
+use Test::NoWarnings;
 use Test::Builder::Tester;
 use Test::Builder::Tester::Color;
-use Test::More;
 
 BEGIN {
 	use_ok( 'Test::XML::Deep' );

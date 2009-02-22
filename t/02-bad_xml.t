@@ -1,12 +1,11 @@
 #!perl -T
 
-use XML::Simple;
-use Data::Dumper;
-use Test::Deep;
-use Test::More tests => 3;
+use strict;
+use warnings;
+use Test::More tests => 4;
+use Test::NoWarnings;
 use Test::Builder::Tester;
-#use Test::Builder::Tester::Color;
-use Test::More;
+use Test::Builder::Tester::Color;
 
 BEGIN {
 	use_ok( 'Test::XML::Deep' );
@@ -22,6 +21,7 @@ BEGIN {
 EOXML
 
     test_out("not ok 1");
+    test_fail(+8);
     test_diag(qq{Failed to parse 
 # <?xml version="1.0" encoding="UTF-8"?>
 # <example>
@@ -29,7 +29,6 @@ EOXML
 # </example>
 # 
 # XML::Parser error was: mismatched tag at line 4, column 2, byte 65\n# });
-    test_fail(+1);
     cmp_xml_deeply($xml, { });
     test_test("fail works");
 }
@@ -43,6 +42,7 @@ EOXML
 EOXML
 
     test_out("not ok 1 - half a tag");
+    test_fail(+8);
     test_diag(qq{Failed to parse 
 # <?xml version="1.0" encoding="UTF-8"?>
 # <example>
@@ -50,7 +50,6 @@ EOXML
 # </example>
 # 
 # XML::Parser error was: not well-formed (invalid token) at line 4, column 0, byte 58\n# });
-    test_fail(+1);
     cmp_xml_deeply($xml, { }, 'half a tag');
     test_test("fail works");
 }

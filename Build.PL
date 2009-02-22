@@ -10,6 +10,7 @@ my $builder = Module::Build->new(
     dist_version_from   => 'lib/Test/XML/Deep.pm',
     build_requires => {
         'Test::Simple' => 0.86,
+        'Test::NoWarnings' => 0,
     },
     requires => {
         'perl'        => 5.006,
