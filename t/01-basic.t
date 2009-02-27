@@ -20,14 +20,12 @@ BEGIN {
 </example>
 EOXML
 
-    my $expected = { 'sometag' => [
-                                   {
-                                     'attribute' => 'value',
-                                     'content' => 'some data'
+    my $expected = { 'sometag' => [ {
+                                     attribute => 'value',
+                                     content   => 'some data'
                                    },
-                                   {
-                                     'attribute' => 'other',
-                                     'content' => 'more data'
+                                   { attribute => 'other',
+                                     content   => 'more data'
                                    }
                                  ]
                    };
@@ -45,8 +43,8 @@ EOXML
 </example>
 EOXML
 
-    my $expected = { 'sometag' => array_each( { 'attribute' => re('^\d+$'),
-                                                'content' => re('data$'),
+    my $expected = { 'sometag' => array_each( { attribute => re('^\d+$'),
+                                                content   => re('data$'),
                                                }
                                   )
                    };

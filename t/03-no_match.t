@@ -21,12 +21,10 @@ BEGIN {
 </example>
 EOXML
 
-    my $expected = { 'sometag' => [
-                                   {
-                                     'attribute' => 'value',
-                                     'content' => 'some data'
-                                   },
-                                 ]
+    my $expected = { sometag => [ { attribute => 'value',
+                                    content   => 'some data'
+                                 },
+                               ]
                    };
 
     test_out("not ok 1");
