@@ -125,6 +125,10 @@ sub cmp_xml_deeply {
 
 Jeff Lavallee, C<< <jeff at zeroclue.com> >>
 
+=head1 LIMITATIONS
+
+Although XML::Simple's XMLin() will accept a filehandle, filename, or string to parse, this module will only accept a string containing XML as the first argument.  
+
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-test-xml-deep at rt.cpan.org>, or through
