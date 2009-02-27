@@ -9,6 +9,8 @@ t/00-load.t
 t/01-basic.t
 t/02-bad_xml.t
 t/03-no_match.t
+t/04-files.t
 t/boilerplate.t
+t/example.xml
 t/pod-coverage.t
 t/pod.t
