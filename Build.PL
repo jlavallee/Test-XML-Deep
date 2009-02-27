@@ -8,6 +8,7 @@ my $builder = Module::Build->new(
     dist_author         => 'Jeff Lavallee <jeff@zeroclue.com>',
     dist_abstract       => 'XML::Simple + Test::Deep = Test::XML::Deep',
     dist_version_from   => 'lib/Test/XML/Deep.pm',
+    sign                => 1,
     build_requires => {
         'Test::Simple' => 0.86,
         'Test::NoWarnings' => 0,
