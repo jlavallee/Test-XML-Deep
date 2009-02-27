@@ -97,13 +97,21 @@ cmp_xml_deeply
 sub cmp_xml_deeply {
     my ( $xml, $expected, $name ) = @_;
 
+    my $parse_method = 'parse';
+
+    # allow filenames to work
+    if( ( ref $xml && ref $xml ne 'SCALAR' )
+      || $xml !~ m{<.*?>}s ) {
+        $parse_method = 'parsefile';
+    }
+
     my $parser = new XML::Parser(Style => 'Tree');
-    eval { $parser->parse($xml); };
+    eval { $parser->$parse_method($xml); };
 
  
     my $not_ok = $@;
 
-	if ($not_ok){
+	if( $not_ok ){
         ( my $message = $not_ok ) =~ s/ at (?!line).*//g;   # ick!
         $message =~ s/^\n//g;
         #chomp $message;
@@ -112,7 +120,7 @@ sub cmp_xml_deeply {
 	}else{
         my $test  = XMLin( $xml ); 
         my ($ok, $stack) = Test::Deep::cmp_details($test, $expected);
-        if (not $Test->ok($ok, $name)){
+        if( not $Test->ok($ok, $name) ){
             my $diag = deep_diag($stack);
             $Test->diag($diag);
         }

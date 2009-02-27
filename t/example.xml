@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<example>
+    <sometag attribute="value">some data</sometag>
+    <sometag attribute="other">more data</sometag>
+</example>
+
