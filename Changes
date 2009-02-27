@@ -8,3 +8,6 @@ Revision history for Test-XML-Deep
 
 0.03    Sat Feb 21 13:45:41 PST 2009
         Use XML::Parser for initial XML parsing
+
+0.04    Thu Feb 26 20:52:55 PST 2009
+        Accept filenames in addition to XML strings
