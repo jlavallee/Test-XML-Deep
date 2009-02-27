@@ -47,41 +47,30 @@ An Example:
     </example>
     EOXML
 
-    my $expected = { 'sometag' => [
-                                   {
-                                     'attribute' => 'value',
-                                     'content' => 'some data'
-                                   },
-                                   {
-                                     'attribute' => 'other',
-                                     'content' => 'more data'
-                                   }
-                                 ]
+    my $expected = { sometag => [ { attribute => 'value',
+                                    content   => 'some data'
+                                 },
+                               ]
                    };
 
     cmp_xml_deeply($xml, $expected);
 
 
-Or, you can use Test::Deep and make use of the functions it exports (I.E. array_each(), re()):
+The real power comes from using Test::Deep and making use of the functions it exports (I.E. array_each(), re()):
 
     use Test::Deep;
-    use Test::XML::Deep;
 
-    my $xml = <<EOXML;
-    <?xml version="1.0" encoding="UTF-8"?>
-    <example>
-        <sometag attribute="1234">some data</sometag>
-        <sometag attribute="4321">more data</sometag>
-    </example>
-    EOXML
-
-    my $expected = { 'sometag' => array_each( { 'attribute' => re('^\d+$'),
-                                                'content' => re('data$'),
-                                               }
-                                  )
+    my $expected = { sometag => array_each( { attribute => re('^\w+$'),
+                                              content   => re('data$'),
+                                             }
+                                )
                    };
 
     cmp_xml_deeply($xml, $expected);
+
+You can also pass in a filename:
+
+    cmp_xml_deeply('somefile.xml', { my_expected => 'data_structure' });
 
 
 =head1 EXPORT
@@ -90,7 +79,7 @@ cmp_xml_deeply
 
 =head1 FUNCTIONS
 
-=head2 cmp_xml_deeply
+=head2 cmp_xml_deeply( $xml, $hashref_expected, [ 'test name' ] );
 
 =cut
 
@@ -133,10 +122,6 @@ sub cmp_xml_deeply {
 
 Jeff Lavallee, C<< <jeff at zeroclue.com> >>
 
-=head1 LIMITATIONS
-
-Although XML::Simple's XMLin() will accept a filehandle, filename, or string to parse, this module will only accept a string containing XML as the first argument.  
-
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-test-xml-deep at rt.cpan.org>, or through
@@ -174,9 +159,6 @@ L<http://search.cpan.org/dist/Test-XML-Deep>
 =back
 
 
-=head1 ACKNOWLEDGEMENTS
-
-
 =head1 COPYRIGHT & LICENSE
 
 Copyright 2009 Jeff Lavallee, all rights reserved.
@@ -186,7 +168,7 @@ under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-L<Test::XML::Simple>
+L<Test::XML::Simple>, L<Test::Deep>
 
 
 =cut
