@@ -6,7 +6,6 @@ use strict;
 use Exporter;
 use XML::Parser;
 use XML::Simple;
-use Sub::Uplevel qw/uplevel/;
 use Test::Deep qw/deep_diag/;
 
 my $Test = Test::Builder->new;
