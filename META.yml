@@ -1,6 +1,6 @@
 ---
 name: Test-XML-Deep
-version: 0.05
+version: 0.06
 author:
   - 'Jeff Lavallee <jeff@zeroclue.com>'
 abstract: XML::Simple + Test::Deep = Test::XML::Deep
@@ -18,7 +18,7 @@ build_requires:
 provides:
   Test::XML::Deep:
     file: lib/Test/XML/Deep.pm
-    version: 0.05
+    version: 0.06
 generated_by: Module::Build version 0.3104
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html

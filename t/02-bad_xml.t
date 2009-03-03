@@ -2,8 +2,7 @@
 
 use strict;
 use warnings;
-use Test::More tests => 4;
-use Test::NoWarnings;
+use Test::More tests => 3;
 use Test::Builder::Tester;
 use Test::Builder::Tester::Color;
 

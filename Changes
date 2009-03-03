@@ -14,4 +14,6 @@ Revision history for Test-XML-Deep
 
 0.05    Fri Feb 27 16:30:33 PST 2009
         Oops - we don't need Sub::Uplevel
-    
+
+0.06    Mon Mar  2 20:09:19 PST 2009
+        Don't use Test::NoWarnings in all the tests - XML::Parser throws warnings in CPAN Smokers
