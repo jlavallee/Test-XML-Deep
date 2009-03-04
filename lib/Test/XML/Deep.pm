@@ -80,6 +80,12 @@ cmp_xml_deeply
 
 =head2 cmp_xml_deeply( $xml, $hashref_expected, [ 'test name' ] );
 
+$xml is a filename or string of XML that you'd like to test.
+
+$hashref_expected should be the expected value of the XML as it would be parsed by XML::Simple.
+
+An optional test name is accepted as the third parameter.
+
 =cut
 
 sub cmp_xml_deeply {
@@ -173,3 +179,4 @@ L<Test::XML::Simple>, L<Test::Deep>
 =cut
 
 1; # End of Test::XML::Deep
+
