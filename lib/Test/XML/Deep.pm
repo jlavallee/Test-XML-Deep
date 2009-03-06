@@ -121,7 +121,9 @@ sub cmp_xml_deeply {
     }
 }
 
+=head1 ACKNOWLEDGEMENTS
 
+Fergal Daly, for exporting cmp_details from Test::Deep lickety-split!
 
 =head1 AUTHOR
 
