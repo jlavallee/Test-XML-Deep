@@ -17,7 +17,7 @@ my $builder = Module::Build->new(
         'perl'        => 5.006,
         'XML::Parser' => 2.36,
         'XML::Simple' => 2.18,
-        'Test::Deep'  => 0,
+        'Test::Deep'  => 0.104,
     },
     add_to_cleanup      => [ 'Test-XML-Deep-*' ],
     create_makefile_pl => 'traditional',

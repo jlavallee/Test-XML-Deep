@@ -6,7 +6,7 @@ use strict;
 use Exporter;
 use XML::Parser;
 use XML::Simple;
-use Test::Deep qw/deep_diag/;
+use Test::Deep qw/deep_diag cmp_details/;
 
 my $Test = Test::Builder->new;
 
@@ -113,7 +113,7 @@ sub cmp_xml_deeply {
 		$Test->diag("Failed to parse \n$xml\nXML::Parser error was: $message\n");
 	}else{
         my $test  = XMLin( $xml ); 
-        my ($ok, $stack) = Test::Deep::cmp_details($test, $expected);
+        my ($ok, $stack) = cmp_details($test, $expected);
         if( not $Test->ok($ok, $name) ){
             my $diag = deep_diag($stack);
             $Test->diag($diag);
