@@ -3,14 +3,13 @@ package Test::XML::Deep;
 use warnings;
 use strict;
 
-use Exporter;
+use base 'Test::Builder::Module';
+
 use XML::Parser;
 use XML::Simple;
 use Test::Deep qw/deep_diag cmp_details/;
 
-my $Test = Test::Builder->new;
-
-use base qw/Exporter/;
+my $Builder = __PACKAGE__->builder;
 
 our @EXPORT = qw/ cmp_xml_deeply /;
 
@@ -109,14 +108,14 @@ sub cmp_xml_deeply {
         ( my $message = $not_ok ) =~ s/ at (?!line).*//g;   # ick!
         $message =~ s/^\n//g;
         #chomp $message;
-        $Test->ok(0, $name);
-		$Test->diag("Failed to parse \n$xml\nXML::Parser error was: $message\n");
+        $Builder->ok(0, $name);
+		$Builder->diag("Failed to parse \n$xml\nXML::Parser error was: $message\n");
 	}else{
         my $test  = XMLin( $xml ); 
         my ($ok, $stack) = cmp_details($test, $expected);
-        if( not $Test->ok($ok, $name) ){
+        if( not $Builder->ok($ok, $name) ){
             my $diag = deep_diag($stack);
-            $Test->diag($diag);
+            $Builder->diag($diag);
         }
     }
 }
