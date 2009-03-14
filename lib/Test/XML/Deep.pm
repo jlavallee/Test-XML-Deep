@@ -124,6 +124,8 @@ sub cmp_xml_deeply {
 
 Fergal Daly, for exporting cmp_details from Test::Deep lickety-split!
 
+Michael G Schwern, for Test::Builder, which makes modules like this possible.
+
 =head1 AUTHOR
 
 Jeff Lavallee, C<< <jeff at zeroclue.com> >>

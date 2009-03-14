@@ -10,6 +10,7 @@ t/01-basic.t
 t/02-bad_xml.t
 t/03-no_match.t
 t/04-files.t
+t/05-no_need_to_use_test_more.t
 t/boilerplate.t
 t/example.xml
 t/pod-coverage.t
