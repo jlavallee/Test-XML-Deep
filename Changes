@@ -17,3 +17,6 @@ Revision history for Test-XML-Deep
 
 0.06    Mon Mar  2 20:09:19 PST 2009
         Don't use Test::NoWarnings in all the tests - XML::Parser throws warnings in CPAN Smokers
+
+0.07    Fri Mar 20 18:40:47 PDT 2009
+        Use new Test::Deep that exports cmp_details
