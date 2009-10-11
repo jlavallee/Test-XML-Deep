@@ -11,7 +11,7 @@ my $builder = Module::Build->new(
     meta_merge     => {
         resources => {
             bugtracker => 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-XML-Deep',
-            repository => 'http://github.com/jlavallee/test-xml-deep/',
+            repository => 'http://github.com/jlavallee/Test-XML-Deep/',
         }
     },
     sign                => 1,
