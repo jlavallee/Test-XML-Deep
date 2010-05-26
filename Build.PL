@@ -14,7 +14,7 @@ my $builder = Module::Build->new(
             repository => 'http://github.com/jlavallee/Test-XML-Deep/',
         }
     },
-    sign                => 1,
+    sign                => 0,
     build_requires => {
         'Test::Simple' => 0.86,
         'Test::NoWarnings' => 0,
